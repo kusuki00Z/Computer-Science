@@ -44,11 +44,11 @@ max_height = wn.numinput("Maximun height of the rectangles",
 
 
 # Function to draw rectangle
-def drawRectangle(someturtle,w,h,r,g,b):
-    someturtle.pencolor(r,g,b)
-    someturtle.fillcolor(r,g,b)
+def drawRectangle(someturtle,w,h,r_val,g_val,b_val):
+    someturtle.pencolor(r_val,g_val,b_val)
+    someturtle.fillcolor(r_val,g_val,b_val)
     someturtle.begin_fill()
-    for i in range(4):
+    for i in range(2):
         someturtle.forward(w)
         someturtle.right(90)
         someturtle.forward(h)
@@ -79,7 +79,6 @@ for i in range(int(amount)):
     b = random.randrange(0,256)
     drawRectangle(rectangle,width,height,r,g,b)
     moveTurtle(rectangle,x,y,0)
-
 
 
 
