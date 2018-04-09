@@ -1,7 +1,7 @@
 # -----------------------------------------+
-# your name, your partner's name           |
+# Shengnan Zhou, Alex Tseng                |
 # CSCI 107, Assignment 8                   |
-# Last Updated: ??                         |
+# Last Updated: April 9, 2018              |
 # -----------------------------------------|
 # Make modifications to a musical          |
 # composition program.                     |
