@@ -12,10 +12,10 @@ import math
 import struct
 
 # beats per minute
-BPM = 200
+BPM = 260
 
 # allowed notes and their frequencies
-FREQUENCIES = {'A': 880, 'A#': 932, 'B': 493,
+FREQUENCIES = {'A': 880, 'A#': 466, 'B': 493,
                'C': 523, 'C#': 554, 'D': 587,
                'D#': 622, 'E': 659, 'F': 698,
                'F#': 740, 'G': 784, 'G#': 830}
@@ -92,9 +92,10 @@ def viewSong(song):
         for note in POSSIBLE_NOTES:
             print("{0:4s}".format(note), end="")
         print()
-        
+
         for note in song:
             noteName = note[0]     # note name
+            noteName = noteName.upper()
             noteLength = note[1]   # note length
 
             # now print this line of the score
@@ -231,7 +232,7 @@ def playSong(song):
 # -------------------------------------------------
 
 # start the music program
-main()
+# main()
 
 # When you submit your solution, uncomment the lines below
 # and replace the notes for myEpicSong with the song you compose
@@ -239,13 +240,20 @@ main()
 
 
 
-# Name of the song
 
-#myEpicSong = [('e', 1), ('e', 1), ('E', 2), ('E', 1), ('E', 1),
-#              ('e', 2), ('e', 1),('G', 1), ('C', 1), ('D', 1),('E', 4)]
-#
-#viewSong(myEpicSong)
-#playSong(myEpicSong)
+
+# Ultimate Battle Simplified Version
+
+myEpicSong = [('d#', 1), ('d#', 1), ('d#', 1), ('d#', 1), ('d#', 1), ('D', 1), ('C', 1), ('A#', 2), 
+              ('D#', 1), ('D#', 1), ('D#', 1), ('D#', 1), ('D#', 1), ('f', 1), ('G', 1), ('F', 2), 
+              ('D#', 1), ('d#', 1), ('D#', 1), ('d#', 1), ('D#', 1), ('G#', 1), ('G', 1), ('f', 1), 
+              ('D#', 2), ('G', 1), ('F', 2), ('d#', 1), ('F', 1), ('G', 1), ('f', 1), ('D#', 1), 
+              ('C', 1), ('D#', 1), ('C', 1), ('D#', 1), ('F', 1), ('G', 1), 
+              ('f', 1), ('c', 1), ('a#', 1), ('c', 3)]
+
+
+viewSong(myEpicSong)
+playSong(myEpicSong)
 
 
 
