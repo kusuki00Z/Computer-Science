@@ -1,7 +1,7 @@
 # -----------------------------------------+
 # Shengnan Zhpu, Alex Tseng                |
 # CSCI 107, Assignment 9                   |
-# Last Updated: April 13, 2018             |
+# Last Updated: April 16, 2018             |
 # -----------------------------------------|
 # Draw recursive squares.                  |
 # -----------------------------------------+
@@ -50,13 +50,6 @@ def draw_squares(t, left_x, top_y, length, level):
     if level > 1:
         draw_squares(t, left_x, top_y, length/2, level-1)
         draw_squares(t, left_x+length/2, top_y-length/2, length/2, level-1)
-
-
-
-
-
-
-
 
 
 
