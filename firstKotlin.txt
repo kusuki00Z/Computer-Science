@@ -1,0 +1,141 @@
+/*
+ * CSCI 305, Assignment Kotlin
+ * Shengnan Zhou
+ * Mar.29, 2019
+ */
+
+
+
+// step 1: define a _data class_ called "City" with name (string), 
+// latitude (double), and longtitude (double)
+data class City (val name: String, val latitude: Double, val longtitude: Double)
+
+
+// step 2: define a function called "listCities()" to return
+// a "list" of City objects
+fun listCities(): List<City> {
+    val atlanta = City("Atlanta", 33.7490, -84.3880)
+    val bozeman = City("Bozeman", 45.6770, -111.0429)
+    val newYork = City("New York", 40.7128, -74.0060)
+    val sanFrancisco = City("San Francisco", 37.7749, -122.4194)
+    val tacoma = City("Tacoma", 47.2529, -122.4443)
+    
+    val cities = listOf(atlanta, bozeman, newYork, sanFrancisco, tacoma)
+    return cities
+}
+
+
+// step 3: define a function "distanceFromSeattle()" that takes a
+// City object and return the distance in kilometers (double) between
+// that city and Seattle
+fun distanceFromSeattle(city: City): Double {
+    val seattle = City("Seattle", 47.6062, -122.3321)
+    val lat1 = seattle.latitude
+    val lon1 = seattle.longtitude
+    val lat2 = city.latitude
+    val lon2 = city.longtitude
+    
+    val distance = haversine(lat1, lon1, lat2, lon2)
+    return distance
+}
+
+// function to calculate distance
+fun haversine(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+    val R = 6372.8 			// in kilometers
+    val l1 = Math.toRadians(lat1)
+    val l2 = Math.toRadians(lat2)
+    val dl = Math.toRadians(lat2 - lat1)
+    val dr = Math.toRadians(lon2 - lon1)
+    return 2 * R * Math.asin(Math.sqrt(Math.pow(Math.sin(dl/2), 2.0) + Math.pow(Math.sin(dr/2), 2.0) * Math.cos(l1) * Math.cos(l2)))
+}
+
+
+// step 5 anonymous function used to filter the list
+fun filterDistance(distance: Double): Boolean {
+    if (distance > 1000.0) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+
+// step 6 function to filter cities that are to the west
+// of the Mississippi
+fun filterWest(city: City): Boolean {
+    if (city.longtitude < -89.97803) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+
+
+// main function
+fun main() {
+    // step 2 result:
+    println("*****Step Two*****")
+    val cityLocations = listCities()
+    for (element in cityLocations) {
+        println(element)
+    }
+    
+    
+    // step 3 result:
+    println("*****Step Three*****")
+    val distance = distanceFromSeattle(cityLocations[4])
+    println("The distance between Seattle and Tacoma is ")
+    println(distance.toString() + " km")
+    
+    
+    // step 4 result:
+    println("*****Step Four*****")
+    println("A new List with the distances of all cities in list to Seattle: ")
+    val distanceMap = cityLocations.map{it -> distanceFromSeattle(it)}
+    println(distanceMap)
+    
+    
+    // step 5 result:
+    println("*****Step Five*****")
+    println("List of cities over 1000KM from Seattle: ")
+    val distanceFilter = cityLocations.filter{it -> filterDistance(distanceFromSeattle(it))}
+    for (element in distanceFilter) {
+        println(element.name)
+    }
+    
+    
+    // step 6 result:
+    println("*****Step Six*****")
+    val westFilter = cityLocations.filter{it -> filterWest(it)}
+    val nameList = westFilter.map{it -> it.name}
+    println(nameList)
+    
+    
+    // step 7 result:
+    println("*****Step Seven*****")
+    val furthestCity = cityLocations.maxBy{it -> distanceFromSeattle(it)}
+    println("Max Distance: " + furthestCity)
+    
+    
+    // step 8 result:
+    println("*****Step Eight*****")
+    val tempMap: Map<String, City> = mutableMapOf(cityLocations[0].name to cityLocations[0], 
+                                                  cityLocations[1].name to cityLocations[1],
+                                                  cityLocations[2].name to cityLocations[2],
+                                                  cityLocations[3].name to cityLocations[3],
+                                                  cityLocations[4].name to cityLocations[4])
+    val mappedCities: Map<String, City> = tempMap
+    
+    mappedCities.forEach{
+        k, v -> println("Name $k: $v")
+    }
+    
+    if (mappedCities.containsKey("Bozeman")) {
+        println("The latitude for Bozeman is " + mappedCities["Bozeman"]?.latitude)
+    }
+    
+    
+}
